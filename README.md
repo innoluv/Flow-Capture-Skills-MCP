@@ -65,17 +65,6 @@ This installs, builds, and registers the server in one step.
 | `medical_necessity_check` | Checks ICD-CPT alignment and documentation completeness against CMS guidelines |
 | `ncci_edit_check` | Checks NCCI PTP edit and MUE compliance for procedure code pairs |
 
-### Utilities
-
-| Tool | What it does |
-|------|-------------|
-| `greet_user` | Personalized greeting (test/demo) |
-| `text_to_slug` | Converts text to URL-friendly slugs |
-| `text_count_words` | Counts words, characters, sentences, paragraphs |
-| `text_extract_emails` | Extracts email addresses from text |
-| `json_validate` | Validates JSON strings |
-| `json_format` | Pretty-prints JSON |
-
 ### Meta
 
 | Tool | What it does |
@@ -167,7 +156,7 @@ Files under `skills/` are **read-only imports** from external skill authors. See
 
 ### Adding a new MCP tool stub
 
-See [CLAUDE.md](CLAUDE.md) and `src/skills/hello-world.skill.ts` as a template. The pattern:
+See [CLAUDE.md](CLAUDE.md) and `src/skills/em-generator.skill.ts` as a template. The pattern:
 
 1. Create `src/skills/my-skill.skill.ts` exporting `metadata` + `register(server)`
 2. Add import + array entry in `src/skills/index.ts`

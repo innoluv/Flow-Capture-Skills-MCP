@@ -2,18 +2,12 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SkillModule } from "../types.js";
 
 import * as catalog from "./_catalog.skill.js";
-import * as helloWorld from "./hello-world.skill.js";
-import * as textTransform from "./text-transform.skill.js";
-import * as jsonUtils from "./json-utils.skill.js";
 import * as emGenerator from "./em-generator.skill.js";
 import * as icdValidator from "./icd-validator.skill.js";
 import * as medicalNecessityChecker from "./medical-necessity-checker.skill.js";
 import * as ncciEditChecker from "./ncci-edit-checker.skill.js";
 
 const skills: SkillModule[] = [
-  helloWorld,
-  textTransform,
-  jsonUtils,
   emGenerator,
   icdValidator,
   medicalNecessityChecker,
