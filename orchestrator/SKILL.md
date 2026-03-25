@@ -1,6 +1,6 @@
 ---
 name: flow-skills
-description: Intelligent router for Flow Code Skills MCP — analyzes the user's request and invokes the right skill tool automatically. Use when the user asks to perform text processing, JSON operations, or any task that maps to the available MCP tools.
+description: Intelligent router for Flow Code Skills MCP — analyzes the user's request and invokes the right skill tool automatically. Use when the user asks to perform text processing, JSON operations, medical coding, E&M assignment, ICD validation, medical necessity checks, NCCI edit compliance, or any task that maps to the available MCP tools.
 ---
 
 # Flow Code Skills Orchestrator
@@ -28,6 +28,7 @@ Return the result clearly. If a tool returned an error, explain what went wrong 
 
 ## Routing Examples
 
+**Utilities:**
 - "slugify this title" → `text_to_slug`
 - "how many words in this paragraph" → `text_count_words`
 - "find emails in this text" → `text_extract_emails`
@@ -35,6 +36,17 @@ Return the result clearly. If a tool returned an error, explain what went wrong 
 - "pretty print this JSON" → `json_format`
 - "say hi to John" → `greet_user`
 - "what tools are available?" → `list_skills`
+
+**Medical Coding:**
+- "assign E&M code for this encounter" → `em_generate`
+- "what E&M level is this visit?" → `em_generate`
+- "validate these ICD codes" → `icd_validate`
+- "check ICD specificity" → `icd_validate`
+- "check medical necessity for these CPTs" → `medical_necessity_check`
+- "will this claim get denied?" → `medical_necessity_check`
+- "check NCCI edits on this claim" → `ncci_edit_check`
+- "are these CPT codes bundled?" → `ncci_edit_check`
+- "MUE check for this encounter" → `ncci_edit_check`
 
 ## Important
 
