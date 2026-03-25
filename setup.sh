@@ -44,7 +44,7 @@ npm run build --silent
 
 # Register with Claude Code
 echo "[3/3] Registering MCP server with Claude Code..."
-claude mcp add --transport stdio "$SERVER_NAME" -- node "$SCRIPT_DIR/dist/index.js"
+claude mcp add --transport stdio --scope user "$SERVER_NAME" -- node "$SCRIPT_DIR/dist/index.js"
 
 echo ""
 echo "Setup complete!"
@@ -52,7 +52,7 @@ echo ""
 echo "Next steps:"
 echo "  1. Start (or restart) a Claude Code session"
 echo "  2. Ask Claude: \"List all available flow code skills\""
-echo "  3. All tools are now available automatically"
+echo "  3. Skills are now available in ALL Claude Code sessions (any directory)"
 echo ""
 echo "To update later:  git pull && npm run build"
 echo "To check status:  claude mcp list"

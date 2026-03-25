@@ -29,8 +29,10 @@ npm run build
 ### Step 3: Register the MCP server with Claude Code
 
 ```bash
-claude mcp add --transport stdio flow-code-skills -- node "$(pwd)/dist/index.js"
+claude mcp add --transport stdio --scope user flow-code-skills -- node "$(pwd)/dist/index.js"
 ```
+
+This registers the server **globally** — skills will be available in every Claude Code session, regardless of which directory you're in.
 
 ### Step 4: Verify
 
@@ -117,7 +119,7 @@ Then restart your Claude Code session to pick up the changes.
 **"MCP server not found" or tools not showing up**
 
 1. Check the server is registered: `claude mcp list`
-2. If missing, re-register: `claude mcp add --transport stdio flow-code-skills -- node "$(pwd)/dist/index.js"`
+2. If missing, re-register: `claude mcp add --transport stdio --scope user flow-code-skills -- node "$(pwd)/dist/index.js"`
 3. Restart your Claude Code session
 
 **"Cannot find module" errors**
