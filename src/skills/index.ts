@@ -6,12 +6,16 @@ import * as emGenerator from "./em-generator.skill.js";
 import * as icdValidator from "./icd-validator.skill.js";
 import * as medicalNecessityChecker from "./medical-necessity-checker.skill.js";
 import * as ncciEditChecker from "./ncci-edit-checker.skill.js";
+import * as addonDependencyCheck from "./addon-dependency-check.skill.js";
+import * as modifierCheck from "./modifier-check.skill.js";
 
 const skills: SkillModule[] = [
   emGenerator,
   icdValidator,
   medicalNecessityChecker,
   ncciEditChecker,
+  addonDependencyCheck,
+  modifierCheck,
 ];
 
 export function registerAllSkills(server: McpServer): void {
