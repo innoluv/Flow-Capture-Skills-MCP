@@ -52,7 +52,32 @@ If you've already cloned the repo, run:
 bash setup.sh
 ```
 
-This installs, builds, and registers the server in one step.
+This installs, builds, and registers the server in one step — with both Claude Code CLI and Claude Desktop (if installed).
+
+### Claude Desktop Users
+
+The setup script automatically adds the MCP server to your Claude Desktop config. If you prefer to do it manually, add this to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS):
+
+```json
+{
+  "mcpServers": {
+    "flow-code-skills": {
+      "command": "node",
+      "args": ["/absolute/path/to/Flow Code Skills MCP/dist/index.js"]
+    }
+  }
+}
+```
+
+Then restart Claude Desktop. Skills work in **Cowork mode** (not the Chat tab).
+
+### After Setup: Zero Friction
+
+Once set up, there's nothing else to do:
+
+- **Always connected** — the MCP server starts automatically with every session. No commands to run, nothing to launch.
+- **Auto-triggers** — Claude detects when a skill is relevant and calls it automatically. Just describe what you need in plain language.
+- **Works everywhere** — skills are available globally, in any directory, any project, any Claude Code or Desktop Cowork session.
 
 ---
 

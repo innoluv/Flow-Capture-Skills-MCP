@@ -313,8 +313,8 @@
 </header>
 
 <div class="hero">
-  <strong>Just chat. Claude picks the right skill.</strong>
-  <p>Set it up once and the skills stay connected permanently. Every Claude Code session has them ready. Describe what you need in plain language &mdash; no commands, no manual steps, no code to write.</p>
+  <strong>Set up once. Use forever. Just chat.</strong>
+  <p>Run the setup once and the skills stay connected permanently &mdash; every session, any directory. Claude automatically picks the right skill based on your request. No commands to remember, no manual steps, no code to write. It just works.</p>
 </div>
 
 <div class="grid">
@@ -363,25 +363,25 @@
         <div class="code-block"><span class="prompt">$</span> git clone https://github.com/innoluv/Flow-Code-Skills-MCP.git<br><span class="prompt">$</span> cd <span class="string">"Flow Code Skills MCP"</span></div>
       </li>
       <li>
-        <strong>Install &amp; build</strong>
-        <div class="code-block"><span class="prompt">$</span> npm install <span class="flag">&amp;&amp;</span> npm run build</div>
+        <strong>Run setup</strong>
+        <div class="code-block"><span class="prompt">$</span> bash setup.sh</div>
+        <span style="font-size:12px;color:var(--muted)">Installs deps, builds, and registers with both Claude Code CLI and Claude Desktop automatically.</span>
       </li>
       <li>
-        <strong>Register with Claude Code</strong>
-        <div class="code-block"><span class="prompt">$</span> claude mcp add <span class="flag">--transport</span> stdio <span class="flag">--scope</span> user \<br>&nbsp;&nbsp;flow-code-skills <span class="flag">--</span> node <span class="string">"$(pwd)/dist/index.js"</span></div>
+        <strong>Restart</strong> Claude Code or Claude Desktop
       </li>
       <li>
-        <strong>Verify</strong> &mdash; restart Claude Code and ask:<br>
+        <strong>Verify</strong> &mdash; ask Claude:<br>
         <em style="color:var(--muted)">"List all available flow code skills"</em>
       </li>
     </ol>
-    <p style="margin-top:10px;font-size:12px">Or just run: <code>bash setup.sh</code></p>
+    <p style="margin-top:12px;font-size:12px;color:var(--muted)">Requires: Node.js 18+, Git. Claude Code CLI is optional &mdash; setup.sh also configures Claude Desktop directly.</p>
   </div>
 
   <!-- How to use -->
   <div class="card">
     <h2><span class="icon">&#128172;</span> How to Use</h2>
-    <p style="margin-bottom:12px;color:var(--muted);font-size:13px">Open Claude Code and say things like:</p>
+    <p style="margin-bottom:12px;color:var(--muted);font-size:13px">Open Claude Code or Claude Desktop (Cowork) and say things like:</p>
     <div style="display:flex;flex-direction:column;gap:8px">
       <div style="background:var(--bg);border-radius:8px;padding:10px 14px;font-size:13px;border:1px solid var(--border)">
         <em>"Assign an E&amp;M code for this encounter note"</em>
@@ -397,6 +397,28 @@
       </div>
     </div>
     <p style="margin-top:12px;font-size:12px;color:var(--muted)">Claude reads your request, calls the right skill, and returns the result &mdash; all in the chat.</p>
+  </div>
+
+  <!-- After setup -->
+  <div class="card full-width" style="background:var(--green-light);border-color:var(--green)">
+    <h2 style="color:var(--green)"><span class="icon">&#10024;</span> After Setup: Zero Friction</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      <div style="text-align:center">
+        <div style="font-size:24px;margin-bottom:6px">&#128268;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--heading);margin-bottom:4px">Always Connected</div>
+        <div style="font-size:12px;color:var(--muted)">The MCP server starts automatically with every session. No commands to run, nothing to launch.</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:24px;margin-bottom:6px">&#128161;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--heading);margin-bottom:4px">Auto-Triggers</div>
+        <div style="font-size:12px;color:var(--muted)">Claude detects when a skill is relevant and calls it automatically. Just describe what you need in plain language.</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:24px;margin-bottom:6px">&#128193;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--heading);margin-bottom:4px">Works Everywhere</div>
+        <div style="font-size:12px;color:var(--muted)">Skills are available globally &mdash; in any directory, any project, any Claude Code or Desktop Cowork session.</div>
+      </div>
+    </div>
   </div>
 
   <!-- Updates -->
