@@ -1,4 +1,4 @@
-# Flow Code Skills MCP
+# Flow Capture Skills MCP
 
 A modular MCP (Model Context Protocol) server that gives Claude Code access to specialized medical coding skills and utility tools. Each skill is a self-contained module that Claude can invoke during conversations.
 
@@ -15,8 +15,8 @@ A modular MCP (Model Context Protocol) server that gives Claude Code access to s
 ### Step 1: Clone the repo
 
 ```bash
-git clone https://github.com/innoluv/Flow-Code-Skills-MCP.git
-cd "Flow Code Skills MCP"
+git clone https://github.com/innoluv/Flow-Capture-Skills-MCP.git
+cd "Flow Capture Skills MCP"
 ```
 
 ### Step 2: Install and build
@@ -29,7 +29,7 @@ npm run build
 ### Step 3: Register the MCP server with Claude Code
 
 ```bash
-claude mcp add --transport stdio --scope user flow-code-skills -- node "$(pwd)/dist/index.js"
+claude mcp add --transport stdio --scope user flow-capture-skills -- node "$(pwd)/dist/index.js"
 ```
 
 This registers the server **globally** — skills will be available in every Claude Code session, regardless of which directory you're in.
@@ -61,9 +61,9 @@ The setup script automatically adds the MCP server to your Claude Desktop config
 ```json
 {
   "mcpServers": {
-    "flow-code-skills": {
+    "flow-capture-skills": {
       "command": "node",
-      "args": ["/absolute/path/to/Flow Code Skills MCP/dist/index.js"]
+      "args": ["/absolute/path/to/Flow Capture Skills MCP/dist/index.js"]
     }
   }
 }
@@ -130,7 +130,7 @@ Without the orchestrator, you can still use the tools directly — Claude sees a
 When new skills are added or existing ones are updated:
 
 ```bash
-cd "Flow Code Skills MCP"
+cd "Flow Capture Skills MCP"
 git pull
 npm run build
 ```
@@ -144,7 +144,7 @@ Then restart your Claude Code session to pick up the changes.
 **"MCP server not found" or tools not showing up**
 
 1. Check the server is registered: `claude mcp list`
-2. If missing, re-register: `claude mcp add --transport stdio --scope user flow-code-skills -- node "$(pwd)/dist/index.js"`
+2. If missing, re-register: `claude mcp add --transport stdio --scope user flow-capture-skills -- node "$(pwd)/dist/index.js"`
 3. Restart your Claude Code session
 
 **"Cannot find module" errors**

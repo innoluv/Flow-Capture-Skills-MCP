@@ -21,7 +21,7 @@ export function register(server: McpServer): void {
     {},
     async () => {
       return jsonContent({
-        server: "flow-code-skills",
+        server: "flow-capture-skills",
         skillCount: catalogData.length,
         skills: catalogData,
       });

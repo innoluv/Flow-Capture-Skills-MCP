@@ -1,5 +1,5 @@
 {
-  "name": "flow-code-skills-mcp",
+  "name": "flow-capture-skills-mcp",
   "main": "src/worker.ts",
   "compatibility_date": "2025-03-10",
   "compatibility_flags": ["nodejs_compat"],
@@ -8,7 +8,7 @@
     "bindings": [
       {
         "name": "MCP_OBJECT",
-        "class_name": "FlowCodeSkillsMCP"
+        "class_name": "FlowCaptureSkillsMCP"
       }
     ]
   },
@@ -16,7 +16,7 @@
   "migrations": [
     {
       "tag": "v1",
-      "new_sqlite_classes": ["FlowCodeSkillsMCP"]
+      "new_sqlite_classes": ["FlowCaptureSkillsMCP"]
     }
   ],
 

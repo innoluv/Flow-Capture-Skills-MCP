@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "flow-code-skills": {
+    "flow-capture-skills": {
       "command": "node",
       "args": ["dist/index.js"]
     }

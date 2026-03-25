@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Flow Code Skills MCP — Local Setup Script
+# Flow Capture Skills MCP — Local Setup Script
 # Usage: bash setup.sh
 
-SERVER_NAME="flow-code-skills"
+SERVER_NAME="flow-capture-skills"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 DIST_PATH="$SCRIPT_DIR/dist/index.js"
 
-echo "=== Flow Code Skills MCP — Local Setup ==="
+echo "=== Flow Capture Skills MCP — Local Setup ==="
 echo ""
 
 # Check prerequisites
@@ -25,7 +25,7 @@ if [ "$NODE_VERSION" -lt 18 ]; then
 fi
 
 if [ ! -f "$SCRIPT_DIR/package.json" ]; then
-  echo "Error: Run this script from the Flow Code Skills MCP repo root."
+  echo "Error: Run this script from the Flow Capture Skills MCP repo root."
   exit 1
 fi
 

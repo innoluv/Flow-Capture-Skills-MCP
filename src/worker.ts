@@ -2,9 +2,9 @@ import { McpAgent } from "agents/mcp";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { registerAllSkills } from "./skills/index.js";
 
-export class FlowCodeSkillsMCP extends McpAgent {
+export class FlowCaptureSkillsMCP extends McpAgent {
   server = new McpServer({
-    name: "flow-code-skills",
+    name: "flow-capture-skills",
     version: "1.0.0",
   });
 
@@ -18,13 +18,13 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/mcp" || url.pathname === "/sse") {
-      return FlowCodeSkillsMCP.serve("/mcp").fetch(request, env, ctx);
+      return FlowCaptureSkillsMCP.serve("/mcp").fetch(request, env, ctx);
     }
 
     if (url.pathname === "/") {
       return new Response(
         JSON.stringify({
-          name: "Flow Code Skills MCP",
+          name: "Flow Capture Skills MCP",
           version: "1.0.0",
           description: "MCP server hosting modular skills for Claude Code",
           endpoints: { mcp: "/mcp", sse: "/sse" },

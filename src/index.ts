@@ -5,7 +5,7 @@ async function main() {
   const server = createServer();
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("[flow-code-skills] Server running on stdio");
+  console.error("[flow-capture-skills] Server running on stdio");
 }
 
 main().catch((err) => {
