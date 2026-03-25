@@ -213,6 +213,11 @@
   <p>A modular MCP server that gives Claude Code access to specialized medical coding skills and utility tools</p>
 </header>
 
+<div class="callout" style="background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:10px 14px;margin-bottom:20px;font-size:12px;line-height:1.6">
+  <strong style="color:var(--accent)">How it works:</strong>
+  Set it up once &mdash; that's it. The MCP server stays registered in Claude Code permanently. Every time you open a Claude Code session, the skills are already connected and ready. Just chat normally &mdash; describe what you need in plain language and Claude automatically picks the right skill. No commands to memorize, no manual invocation, no extra steps.
+</div>
+
 <div class="grid">
 
   <!-- LEFT: Architecture -->
@@ -234,7 +239,7 @@
 
   <!-- RIGHT: Setup -->
   <section>
-    <h2>Local Setup (5 minutes)</h2>
+    <h2>One-Time Setup (5 minutes)</h2>
     <p style="margin-bottom:6px;color:var(--muted)">Requires: Node.js 18+, Claude Code CLI, Git</p>
     <ol class="steps">
       <li>
@@ -255,6 +260,7 @@
       </li>
     </ol>
     <p style="margin-top:6px">Or one command: <code>bash setup.sh</code></p>
+    <p style="margin-top:6px;color:var(--accent);font-weight:600;font-size:11px">After this, you never need to run these steps again. Every future Claude Code session has the skills ready automatically.</p>
   </section>
 
   <!-- FULL WIDTH: Skills Tables -->
