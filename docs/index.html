@@ -3,127 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flow Code Skills MCP — Quick Reference</title>
+<title>Flow Code Skills MCP</title>
 <style>
   :root {
-    --bg: #ffffff;
-    --text: #1a1a2e;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text: #1e293b;
     --muted: #64748b;
     --border: #e2e8f0;
     --accent: #6366f1;
+    --accent-dark: #4f46e5;
     --accent-light: #eef2ff;
-    --code-bg: #f1f5f9;
+    --accent-glow: rgba(99, 102, 241, 0.08);
+    --green: #10b981;
+    --green-light: #ecfdf5;
     --heading: #0f172a;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+    --radius: 10px;
   }
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 13px;
-    line-height: 1.5;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
     color: var(--text);
     background: var(--bg);
-    max-width: 960px;
+    max-width: 920px;
     margin: 0 auto;
-    padding: 32px 24px;
+    padding: 40px 24px;
+    -webkit-font-smoothing: antialiased;
   }
 
+  /* ── Header ── */
   header {
     text-align: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid var(--accent);
+    margin-bottom: 32px;
+  }
+
+  header .badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
   }
 
   header h1 {
-    font-size: 22px;
-    color: var(--heading);
+    font-size: 28px;
     font-weight: 700;
+    color: var(--heading);
     letter-spacing: -0.5px;
+    margin-bottom: 8px;
   }
 
   header p {
     color: var(--muted);
-    font-size: 13px;
-    margin-top: 4px;
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto;
   }
 
+  /* ── Hero callout ── */
+  .hero {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(99,102,241,0.1);
+    text-align: center;
+  }
+
+  .hero strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .hero p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    opacity: 0.92;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .card h2 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card h2 .icon {
+    font-size: 15px;
+  }
+
+  /* ── Grid ── */
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-bottom: 16px;
   }
 
   .full-width { grid-column: 1 / -1; }
 
-  section {
-    break-inside: avoid;
+  /* ── Skills table ── */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
-  h2 {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--accent);
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-  }
-
-  th {
-    text-align: left;
-    font-weight: 600;
-    padding: 4px 8px;
-    background: var(--accent-light);
-    color: var(--heading);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-
-  td {
-    padding: 3px 8px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-
-  td:first-child {
-    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-    font-size: 11px;
-    white-space: nowrap;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  code, .code-block {
-    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-    font-size: 11.5px;
-    background: var(--code-bg);
-    border-radius: 4px;
-  }
-
-  code {
-    padding: 1px 5px;
-  }
-
-  .code-block {
-    display: block;
-    padding: 8px 12px;
-    margin: 6px 0;
-    overflow-x: auto;
+  .skill-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg);
+    border-radius: 8px;
     border: 1px solid var(--border);
-    line-height: 1.6;
   }
 
+  .skill-item .skill-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .skill-item .skill-name {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+
+  .skill-item .skill-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── Steps ── */
   .steps {
     counter-reset: step;
     list-style: none;
@@ -132,7 +192,7 @@
 
   .steps li {
     counter-increment: step;
-    padding: 4px 0 4px 28px;
+    padding: 6px 0 6px 36px;
     position: relative;
   }
 
@@ -140,172 +200,227 @@
     content: counter(step);
     position: absolute;
     left: 0;
-    top: 4px;
-    width: 20px;
-    height: 20px;
+    top: 6px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: var(--accent);
     color: white;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .tree {
-    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-    font-size: 11px;
-    line-height: 1.7;
-    background: var(--code-bg);
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
+  .steps li strong {
+    color: var(--heading);
+    font-weight: 600;
   }
 
-  .tree .comment { color: var(--muted); }
-  .tree .dir { color: var(--accent); font-weight: 600; }
+  /* ── Code blocks ── */
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 12px;
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
 
+  .code-block {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 11.5px;
+    background: var(--heading);
+    color: #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 6px 0;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .code-block .prompt { color: var(--green); }
+  .code-block .flag { color: #fbbf24; }
+  .code-block .string { color: #a5f3fc; }
+
+  /* ── Bullets ── */
   ul.bullets {
     list-style: none;
     padding: 0;
   }
 
   ul.bullets li {
-    padding: 3px 0 3px 16px;
+    padding: 5px 0 5px 20px;
     position: relative;
+    font-size: 13px;
   }
 
   ul.bullets li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 10px;
-    width: 6px;
-    height: 6px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--accent-light);
+    border: 2px solid var(--accent);
   }
 
+  /* ── Highlight tag ── */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--green-light);
+    color: var(--green);
+  }
+
+  /* ── Footer ── */
   footer {
     text-align: center;
     color: var(--muted);
-    font-size: 11px;
-    margin-top: 16px;
-    padding-top: 12px;
+    font-size: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
     border-top: 1px solid var(--border);
   }
 
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* ── Print ── */
   @media print {
-    body { padding: 16px; font-size: 11px; }
-    header { margin-bottom: 16px; }
-    .grid { gap: 12px; margin-bottom: 12px; }
-    h2 { font-size: 11px; }
-    table { font-size: 10px; }
-    .code-block, .tree { font-size: 10px; padding: 6px 8px; }
+    body { padding: 16px; background: white; }
+    .card { box-shadow: none; border: 1px solid #ddd; }
+    .hero { box-shadow: none; }
+    .card:hover { box-shadow: none; }
   }
 </style>
 </head>
 <body>
 
 <header>
+  <div class="badge">Model Context Protocol</div>
   <h1>Flow Code Skills MCP</h1>
-  <p>A modular MCP server that gives Claude Code access to specialized medical coding skills and utility tools</p>
+  <p>Specialized medical coding skills for Claude Code. Set up once, use forever.</p>
 </header>
 
-<div class="callout" style="background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:10px 14px;margin-bottom:20px;font-size:12px;line-height:1.6">
-  <strong style="color:var(--accent)">How it works:</strong>
-  Set it up once &mdash; that's it. The MCP server stays registered in Claude Code permanently. Every time you open a Claude Code session, the skills are already connected and ready. Just chat normally &mdash; describe what you need in plain language and Claude automatically picks the right skill. No commands to memorize, no manual invocation, no extra steps.
+<div class="hero">
+  <strong>Just chat. Claude picks the right skill.</strong>
+  <p>Set it up once and the skills stay connected permanently. Every Claude Code session has them ready. Describe what you need in plain language &mdash; no commands, no manual steps, no code to write.</p>
 </div>
 
 <div class="grid">
 
-  <!-- LEFT: Architecture -->
-  <section>
-    <h2>Architecture</h2>
-    <div class="tree">
-      <span class="dir">skills/</span> <span class="comment"># SKILL.md files (read-only imports)</span><br>
-      <span class="dir">src/</span><br>
-      &nbsp;&nbsp;<span class="dir">index.ts</span> <span class="comment"># Local stdio entry point</span><br>
-      &nbsp;&nbsp;<span class="dir">server.ts</span> <span class="comment"># Shared server factory</span><br>
-      &nbsp;&nbsp;<span class="dir">types.ts</span> <span class="comment"># SkillModule interface</span><br>
-      &nbsp;&nbsp;<span class="dir">skills/</span> <span class="comment"># MCP tool stubs (editable)</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;index.ts <span class="comment"># Skill registry</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;*.skill.ts <span class="comment"># One per skill</span><br>
-      &nbsp;&nbsp;<span class="dir">lib/</span> <span class="comment"># Shared utilities</span><br>
-      <span class="dir">orchestrator/</span> <span class="comment"># Claude Code routing skill</span>
+  <!-- Skills -->
+  <div class="card full-width">
+    <h2><span class="icon">&#9881;</span> What You Get</h2>
+    <div class="skill-grid">
+      <div class="skill-item">
+        <div class="skill-icon">&#128203;</div>
+        <div>
+          <div class="skill-name">em_generate</div>
+          <div class="skill-desc">Assigns E&amp;M CPT codes from clinical encounter notes using 2021 AMA guidelines</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">&#9989;</div>
+        <div>
+          <div class="skill-name">icd_validate</div>
+          <div class="skill-desc">Validates ICD-10-CM codes for specificity, excludes conflicts, and sequencing</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">&#128209;</div>
+        <div>
+          <div class="skill-name">medical_necessity_check</div>
+          <div class="skill-desc">Checks ICD-CPT alignment and documentation completeness against CMS</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">&#128279;</div>
+        <div>
+          <div class="skill-name">ncci_edit_check</div>
+          <div class="skill-desc">Checks NCCI PTP edits and MUE compliance for procedure code pairs</div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- RIGHT: Setup -->
-  <section>
-    <h2>One-Time Setup (5 minutes)</h2>
-    <p style="margin-bottom:6px;color:var(--muted)">Requires: Node.js 18+, Claude Code CLI, Git</p>
+  <!-- Setup -->
+  <div class="card">
+    <h2><span class="icon">&#9889;</span> One-Time Setup <span class="tag">5 min</span></h2>
     <ol class="steps">
       <li>
-        <strong>Clone</strong>
-        <div class="code-block">git clone https://github.com/innoluv/Flow-Code-Skills-MCP.git<br>cd "Flow Code Skills MCP"</div>
+        <strong>Clone the repo</strong>
+        <div class="code-block"><span class="prompt">$</span> git clone https://github.com/innoluv/Flow-Code-Skills-MCP.git<br><span class="prompt">$</span> cd <span class="string">"Flow Code Skills MCP"</span></div>
       </li>
       <li>
         <strong>Install &amp; build</strong>
-        <div class="code-block">npm install &amp;&amp; npm run build</div>
+        <div class="code-block"><span class="prompt">$</span> npm install <span class="flag">&amp;&amp;</span> npm run build</div>
       </li>
       <li>
         <strong>Register with Claude Code</strong>
-        <div class="code-block">claude mcp add --transport stdio \<br>&nbsp;&nbsp;flow-code-skills -- node "$(pwd)/dist/index.js"</div>
+        <div class="code-block"><span class="prompt">$</span> claude mcp add <span class="flag">--transport</span> stdio \<br>&nbsp;&nbsp;flow-code-skills <span class="flag">--</span> node <span class="string">"$(pwd)/dist/index.js"</span></div>
       </li>
       <li>
         <strong>Verify</strong> &mdash; restart Claude Code and ask:<br>
-        <em>"List all available flow code skills"</em>
+        <em style="color:var(--muted)">"List all available flow code skills"</em>
       </li>
     </ol>
-    <p style="margin-top:6px">Or one command: <code>bash setup.sh</code></p>
-    <p style="margin-top:6px;color:var(--accent);font-weight:600;font-size:11px">After this, you never need to run these steps again. Every future Claude Code session has the skills ready automatically.</p>
-  </section>
+    <p style="margin-top:10px;font-size:12px">Or just run: <code>bash setup.sh</code></p>
+  </div>
 
-  <!-- FULL WIDTH: Skills Tables -->
-  <section class="full-width">
-    <h2>Available Skills</h2>
-    <div class="grid" style="margin-bottom:0">
-      <div>
-        <table>
-          <tr><th colspan="2">Medical Coding</th></tr>
-          <tr><td>em_generate</td><td>Assigns E&M CPT codes from encounter notes (2021 AMA)</td></tr>
-          <tr><td>icd_validate</td><td>Validates ICD-10-CM codes &mdash; specificity, excludes, sequencing</td></tr>
-          <tr><td>medical_necessity_check</td><td>Checks ICD-CPT alignment &amp; documentation vs CMS</td></tr>
-          <tr><td>ncci_edit_check</td><td>Checks NCCI PTP edits and MUE compliance</td></tr>
-        </table>
+  <!-- How to use -->
+  <div class="card">
+    <h2><span class="icon">&#128172;</span> How to Use</h2>
+    <p style="margin-bottom:12px;color:var(--muted);font-size:13px">Open Claude Code and say things like:</p>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="background:var(--bg);border-radius:8px;padding:10px 14px;font-size:13px;border:1px solid var(--border)">
+        <em>"Assign an E&amp;M code for this encounter note"</em>
       </div>
-      <div>
-        <table>
-          <tr><th colspan="2">Meta</th></tr>
-          <tr><td>list_skills</td><td>Returns the full catalog of all available skills</td></tr>
-        </table>
+      <div style="background:var(--bg);border-radius:8px;padding:10px 14px;font-size:13px;border:1px solid var(--border)">
+        <em>"Validate ICD codes E11.9 and I10"</em>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:10px 14px;font-size:13px;border:1px solid var(--border)">
+        <em>"Check NCCI edits for 99214 and 93000"</em>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:10px 14px;font-size:13px;border:1px solid var(--border)">
+        <em>"Is CPT 99213 medically necessary for E11.9?"</em>
       </div>
     </div>
-  </section>
+    <p style="margin-top:12px;font-size:12px;color:var(--muted)">Claude reads your request, calls the right skill, and returns the result &mdash; all in the chat.</p>
+  </div>
 
-  <!-- LEFT: Update -->
-  <section>
-    <h2>Keeping Up to Date</h2>
-    <div class="code-block">cd "Flow Code Skills MCP"<br>git pull<br>npm run build</div>
-    <p style="margin-top:4px">Then restart your Claude Code session.</p>
-  </section>
+  <!-- Updates -->
+  <div class="card">
+    <h2><span class="icon">&#128260;</span> Keeping Up to Date</h2>
+    <div class="code-block"><span class="prompt">$</span> cd <span class="string">"Flow Code Skills MCP"</span><br><span class="prompt">$</span> git pull<br><span class="prompt">$</span> npm run build</div>
+    <p style="margin-top:8px;font-size:13px">Then restart Claude Code to pick up changes.</p>
+  </div>
 
-  <!-- RIGHT: Troubleshooting -->
-  <section>
-    <h2>Troubleshooting</h2>
+  <!-- Troubleshooting -->
+  <div class="card">
+    <h2><span class="icon">&#128295;</span> Troubleshooting</h2>
     <ul class="bullets">
-      <li>Tools not showing? Run <code>claude mcp list</code> to check registration</li>
-      <li>"Cannot find module"? Run <code>npm run build</code> to recompile</li>
-      <li>Check MCP status inside Claude Code with <code>/mcp</code></li>
+      <li>Skills not showing? Check registration with <code>claude mcp list</code></li>
+      <li>"Cannot find module"? Recompile with <code>npm run build</code></li>
+      <li>Check MCP status inside any session with <code>/mcp</code></li>
     </ul>
-  </section>
+    <p style="margin-top:10px;font-size:12px;color:var(--muted)">Requires: Node.js 18+, Claude Code CLI, Git</p>
+  </div>
 
 </div>
 
 <footer>
-  github.com/innoluv/Flow-Code-Skills-MCP &middot; Skills are transport-agnostic &middot; Skill files are read-only imports
+  <a href="https://github.com/innoluv/Flow-Code-Skills-MCP">github.com/innoluv/Flow-Code-Skills-MCP</a>
 </footer>
 
 </body>
