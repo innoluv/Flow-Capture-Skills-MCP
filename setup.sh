@@ -1,58 +1,58 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Flow Code Skills MCP — Quick Connect Script
+# Flow Code Skills MCP — Local Setup Script
 # Usage: bash setup.sh
 
-REMOTE_URL="${FLOW_SKILLS_URL:-}"
 SERVER_NAME="flow-code-skills"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo "=== Flow Code Skills MCP — Setup ==="
+echo "=== Flow Code Skills MCP — Local Setup ==="
 echo ""
 
-# Check for Claude Code CLI
-if ! command -v claude &> /dev/null; then
-  echo "Error: Claude Code CLI not found."
-  echo "Install it from: https://claude.ai/download"
+# Check prerequisites
+if ! command -v node &> /dev/null; then
+  echo "Error: Node.js not found. Install it from https://nodejs.org/"
   exit 1
 fi
 
-echo "Choose connection mode:"
-echo "  1) Remote (connect to hosted server via URL)"
-echo "  2) Local  (clone repo and run locally via stdio)"
-echo ""
-read -rp "Enter 1 or 2: " mode
+NODE_VERSION=$(node --version | sed 's/v//' | cut -d. -f1)
+if [ "$NODE_VERSION" -lt 18 ]; then
+  echo "Error: Node.js 18+ required (found $(node --version))."
+  echo "Update from https://nodejs.org/"
+  exit 1
+fi
 
-case "$mode" in
-  1)
-    if [ -z "$REMOTE_URL" ]; then
-      read -rp "Enter the MCP server URL (e.g. https://your-worker.workers.dev/mcp): " REMOTE_URL
-    fi
-    echo ""
-    echo "Connecting to remote server..."
-    claude mcp add --transport http "$SERVER_NAME" "$REMOTE_URL"
-    echo ""
-    echo "Done! Start a Claude Code session and your Flow Code Skills are ready."
-    ;;
-  2)
-    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-    if [ ! -f "$SCRIPT_DIR/package.json" ]; then
-      echo "Error: Run this script from the Flow Code Skills MCP repo root."
-      exit 1
-    fi
-    echo ""
-    echo "Installing dependencies and building..."
-    cd "$SCRIPT_DIR"
-    npm install
-    npm run build
-    echo ""
-    echo "Registering local MCP server..."
-    claude mcp add --transport stdio "$SERVER_NAME" -- node "$SCRIPT_DIR/dist/index.js"
-    echo ""
-    echo "Done! Start a Claude Code session and your Flow Code Skills are ready."
-    ;;
-  *)
-    echo "Invalid choice. Please run again and enter 1 or 2."
-    exit 1
-    ;;
-esac
+if ! command -v claude &> /dev/null; then
+  echo "Error: Claude Code CLI not found."
+  echo "Install it from https://claude.ai/download"
+  exit 1
+fi
+
+if [ ! -f "$SCRIPT_DIR/package.json" ]; then
+  echo "Error: Run this script from the Flow Code Skills MCP repo root."
+  exit 1
+fi
+
+# Install and build
+echo "[1/3] Installing dependencies..."
+cd "$SCRIPT_DIR"
+npm install --silent
+
+echo "[2/3] Building..."
+npm run build --silent
+
+# Register with Claude Code
+echo "[3/3] Registering MCP server with Claude Code..."
+claude mcp add --transport stdio "$SERVER_NAME" -- node "$SCRIPT_DIR/dist/index.js"
+
+echo ""
+echo "Setup complete!"
+echo ""
+echo "Next steps:"
+echo "  1. Start (or restart) a Claude Code session"
+echo "  2. Ask Claude: \"List all available flow code skills\""
+echo "  3. All tools are now available automatically"
+echo ""
+echo "To update later:  git pull && npm run build"
+echo "To check status:  claude mcp list"

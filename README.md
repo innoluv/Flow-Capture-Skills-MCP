@@ -1,132 +1,189 @@
 # Flow Code Skills MCP
 
-A modular Model Context Protocol (MCP) server that hosts individual skills as tools for Claude Code. Each skill is a self-contained module that can be invoked by Claude to perform specific tasks.
+A modular MCP (Model Context Protocol) server that gives Claude Code access to specialized medical coding skills and utility tools. Each skill is a self-contained module that Claude can invoke during conversations.
 
-## Quick Start
+---
 
-### Connect to Remote Server (Recommended)
+## First-Time Setup (5 minutes)
 
-```bash
-claude mcp add --transport http flow-code-skills https://YOUR_WORKER_URL/mcp
-```
+### Prerequisites
 
-### Connect Locally
+- **Node.js 18+** — [download here](https://nodejs.org/) (check with `node --version`)
+- **Claude Code CLI** — [download here](https://claude.ai/download) (check with `claude --version`)
+- **Git** — pre-installed on macOS/Linux; [download for Windows](https://git-scm.com/)
+
+### Step 1: Clone the repo
 
 ```bash
 git clone https://github.com/innoluv/Flow-Code-Skills-MCP.git
 cd "Flow Code Skills MCP"
-npm install && npm run build
-claude mcp add --transport stdio flow-code-skills -- node dist/index.js
 ```
 
-Or use the setup script:
+### Step 2: Install and build
+
+```bash
+npm install
+npm run build
+```
+
+### Step 3: Register the MCP server with Claude Code
+
+```bash
+claude mcp add --transport stdio flow-code-skills -- node "$(pwd)/dist/index.js"
+```
+
+### Step 4: Verify
+
+Start a new Claude Code session (restart if one is already open) and ask:
+
+> "List all available flow code skills"
+
+Claude should call the `list_skills` tool and show you the full catalog.
+
+**That's it.** All skills are now available in every Claude Code session.
+
+### Alternative: One-Command Setup
+
+If you've already cloned the repo, run:
 
 ```bash
 bash setup.sh
 ```
 
+This installs, builds, and registers the server in one step.
+
+---
+
 ## Available Skills
 
-| Skill | Tools | Description |
-|-------|-------|-------------|
-| hello-world | `greet_user` | Personalized greetings in different styles |
-| text-transform | `text_to_slug`, `text_count_words`, `text_extract_emails` | Text transformation and analysis |
-| json-utils | `json_validate`, `json_format` | JSON validation and formatting |
-| _catalog | `list_skills` | Returns the full skill catalog at runtime |
+### Medical Coding
 
-## Using the Orchestrator
+| Tool | What it does |
+|------|-------------|
+| `em_generate` | Assigns E&M CPT codes from clinical encounter notes (2021 AMA guidelines) |
+| `icd_validate` | Validates ICD-10-CM codes for specificity, excludes conflicts, sequencing, billability |
+| `medical_necessity_check` | Checks ICD-CPT alignment and documentation completeness against CMS guidelines |
+| `ncci_edit_check` | Checks NCCI PTP edit and MUE compliance for procedure code pairs |
 
-The `orchestrator/SKILL.md` file is a Claude Code skill that acts as an intelligent router. Copy it to your project's `.claude/skills/` directory:
+### Utilities
+
+| Tool | What it does |
+|------|-------------|
+| `greet_user` | Personalized greeting (test/demo) |
+| `text_to_slug` | Converts text to URL-friendly slugs |
+| `text_count_words` | Counts words, characters, sentences, paragraphs |
+| `text_extract_emails` | Extracts email addresses from text |
+| `json_validate` | Validates JSON strings |
+| `json_format` | Pretty-prints JSON |
+
+### Meta
+
+| Tool | What it does |
+|------|-------------|
+| `list_skills` | Returns the full catalog of all available skills and tools |
+
+---
+
+## Using the Orchestrator Skill
+
+The orchestrator is a Claude Code skill that acts as an intelligent router — it picks the right MCP tool based on your request.
+
+### Install the orchestrator (optional)
+
+Copy it into any project where you want the `/flow-skills` command:
 
 ```bash
+mkdir -p /path/to/your/project/.claude/skills/flow-skills
 cp orchestrator/SKILL.md /path/to/your/project/.claude/skills/flow-skills/SKILL.md
 ```
 
-Then invoke it with `/flow-skills <your request>` and Claude will automatically pick the right tool.
+Then use it:
 
-## Adding a New Skill
-
-1. Create `src/skills/my-skill.skill.ts`:
-
-```typescript
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { z } from "zod";
-import { SkillModule } from "../types.js";
-import { textContent } from "../lib/format.js";
-
-export const metadata = {
-  name: "my-skill",
-  description: "What this skill does",
-  version: "1.0.0",
-};
-
-export function register(server: McpServer): void {
-  server.tool(
-    "my_tool_name",
-    "Description of what this tool does",
-    { input: z.string().describe("The input parameter") },
-    async ({ input }) => {
-      return textContent(`Result: ${input}`);
-    }
-  );
-}
+```
+/flow-skills check NCCI edits for CPT 99214 and 93000
+/flow-skills assign E&M code for this encounter note
+/flow-skills validate these ICD codes: E11.9, I10, Z00.00
 ```
 
-2. Register it in `src/skills/index.ts`:
+Without the orchestrator, you can still use the tools directly — Claude sees all MCP tools and will pick the right one based on your request.
 
-```typescript
-import * as mySkill from "./my-skill.skill.js";
+---
 
-const skills: SkillModule[] = [
-  // ...existing skills
-  mySkill,
-];
-```
+## Keeping Up to Date
 
-3. Build and test:
+When new skills are added or existing ones are updated:
 
 ```bash
-npm run build && npm test
+cd "Flow Code Skills MCP"
+git pull
+npm run build
 ```
 
-The `list_skills` meta-tool and orchestrator SKILL.md auto-discover new skills — no extra config needed.
+Then restart your Claude Code session to pick up the changes.
 
-## Development
+---
+
+## Troubleshooting
+
+**"MCP server not found" or tools not showing up**
+
+1. Check the server is registered: `claude mcp list`
+2. If missing, re-register: `claude mcp add --transport stdio flow-code-skills -- node "$(pwd)/dist/index.js"`
+3. Restart your Claude Code session
+
+**"Cannot find module" errors**
+
+Run `npm run build` — the TypeScript needs to be compiled before the server can run.
+
+**Check server status inside Claude Code**
+
+Type `/mcp` in a Claude Code session to see all connected MCP servers and their status.
+
+**Test the server manually**
+
+```bash
+npm run start:inspect
+```
+
+This opens an interactive browser UI where you can call tools and see responses.
+
+---
+
+## For Contributors
+
+### Development commands
 
 ```bash
 npm install          # Install dependencies
 npm run build        # Compile TypeScript
-npm run dev          # Watch mode
-npm run start:inspect # Test with MCP Inspector (browser UI)
+npm run dev          # Watch mode (auto-recompile on changes)
+npm run start:inspect # Interactive MCP Inspector (browser UI)
 npm test             # Run tests
 ```
 
-## Deployment (Cloudflare Workers)
+### Skill file policy
 
-```bash
-npx wrangler login           # Authenticate with Cloudflare
-npm run worker:dev            # Local CF Workers dev server
-npm run worker:deploy         # Deploy to production
-```
+Files under `skills/` are **read-only imports** from external skill authors. See [CLAUDE.md](CLAUDE.md) for the full policy. Never edit skill files in-place — only replace entire directories with new versions.
 
-After deploying, share the URL with others:
+### Adding a new MCP tool stub
 
-```bash
-claude mcp add --transport http flow-code-skills https://flow-code-skills-mcp.YOUR_ACCOUNT.workers.dev/mcp
-```
+See [CLAUDE.md](CLAUDE.md) and `src/skills/hello-world.skill.ts` as a template. The pattern:
 
-## Architecture
+1. Create `src/skills/my-skill.skill.ts` exporting `metadata` + `register(server)`
+2. Add import + array entry in `src/skills/index.ts`
+3. `npm run build && npm test`
+
+### Architecture
 
 ```
+skills/               # Imported SKILL.md files + references (READ-ONLY)
 src/
 ├── index.ts          # Local stdio entry point
-├── worker.ts         # Cloudflare Workers entry point
 ├── server.ts         # Shared server factory
 ├── types.ts          # SkillModule interface
-├── skills/           # One file per skill (self-contained)
-│   ├── index.ts      # Skill registry (explicit manifest)
-│   └── *.skill.ts    # Individual skills
+├── skills/           # MCP tool stubs (editable repo code)
+│   ├── index.ts      # Skill registry
+│   └── *.skill.ts    # One per skill
 └── lib/              # Shared utilities
+orchestrator/         # Claude Code orchestrator skill
 ```
-
-Both entry points share the same skill registry. Skills are transport-agnostic.
